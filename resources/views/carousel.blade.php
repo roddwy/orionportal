@@ -22,7 +22,7 @@
             <div class="item">
               <img src="images/menu/fotolapaz.jpg" class="img-responsive" alt="">
               <div class="carousel-caption hidden-xs hidden-sm">
-                <h3>Este es la primera imagen</h3>
+                <h3>Este es la segunda imagen</h3>
                 <p>Lorem ipsum dolor sit amet.</p>
               </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="item">
               <img src="images/menu/fotolapaz.jpg" class="img-responsive" alt="">
               <div class="carousel-caption hidden-xs hidden-sm">
-                <h3>Este es la primera imagen</h3>
+                <h3>Este es la tercera imagen</h3>
                 <p>Lorem ipsum dolor sit amet.</p>
               </div>
             </div>

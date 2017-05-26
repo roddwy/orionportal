@@ -27,7 +27,14 @@ class PropertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function principal(Request $request){
-        $properties = property::where('state_id','<>','2')->search($request->id)->orderBy('id', 'DESC')->paginate(3);
+
+        $states = State::where('name','vendido')->orWhere('name','inactivo')->get();
+        $statesid = array();
+        foreach ($states as $state) {
+            $statesid[] = array('state_id'=>$state->id);
+        }
+        //dd($statesid);
+        $properties = property::where('state_id','<>',$statesid[0])->where('state_id','<>',$statesid[1])->search($request->id)->orderBy('id', 'DESC')->paginate(4);
         //$properties = property::all();
         //dd($properties);
         $properties->each(function($properties){

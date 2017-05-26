@@ -32,7 +32,10 @@ Route::get('infoempresa', [
 	'as'	=>	'infoempresa'
 ]);
 
-
+Route::get('contacto', [
+	'uses'	=>	'ContactoController@index',
+	'as'	=>	'contacto'
+]);
 
 /******* RUTAS DEL PANEL DE ADMINISTRACION ******/
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){

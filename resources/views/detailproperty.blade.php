@@ -3,11 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<title>@yield('title', 'Detalles') | ORION BIENES RAICES</title>
+	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}">	
 	<script src="{{ asset('plugins/jquery/js/jquery-3.2.0.js') }}"></script>
 	<style>
 		body{
-    		background-color: black;
+    		background-color: #EBE6E7;
+		}
+		.linavbar{
+			font-family: 'Fjalla One', sans-serif;
+			font-size: 20px;
+		}
+		.titulonavbar{
+			font-family: 'Anton', sans-serif;
+			font-size: 30px;
+
+		}
+		.navbar{
+			margin-bottom: 5px;
+			background-color: #BB1F35;
+		}
+		.navbar-form{
+			background: #BB1F35;
+			padding: 15px;
 		}
 		.row{
 			margin:2%;
@@ -17,10 +36,11 @@
 		.row-detalle{
 			margin:0%;
 		}
-		li{
+		
+		li.detalle{
 			font-size: 10px;
 		}
-
+		
 		.panel{			
 			margin-right: 2%;
 			margin-left: 2%;
@@ -128,11 +148,24 @@
                 });*/
             });
 	</script>
+	<script>
+		$(function() {
+	  	  // elementos de la lista
+		  var menues = $(".nav li"); 
+		  // manejador de click sobre todos los elementos
+		  	menues.click(function() {
+		     // eliminamos active de todos los elementos
+		     menues.removeClass("active");
+		     // activamos el elemento clicado.
+		     $(this).addClass("active");
+		  });
 
+		});
+	</script>
 </head>
 <body>
 	<header>
-		@include('nav')		
+		@include('nav')	
 	</header>
 	
 
@@ -142,16 +175,16 @@
 	  	<div class="row row-detalle">
 	  		<div class="col-md-6">
 		  		<ul class="list-group">
-				  <li class="list-group-item"><strong>Id </strong>{{$property->id}}</li>
-				  <li class="list-group-item"><strong>Zona </strong>{{$property->zone->name}}</li>
-				  <li class="list-group-item"><strong>Fecha </strong>{{$property->admission_date}}</li>				  
+				  <li class="list-group-item detalle"><strong>Id </strong>{{$property->id}}</li>
+				  <li class="list-group-item detalle"><strong>Zona </strong>{{$property->zone->name}}</li>
+				  <li class="list-group-item detalle"><strong>Fecha </strong>{{$property->admission_date}}</li>				  
 				</ul>
 			</div>
 			<div class="col-md-6">
 		  		<ul class="list-group">
-				  <li class="list-group-item"><strong>Precio </strong>{{$property->sale_price}} $</li>
-				  <li class="list-group-item"><strong>Sup. Terreno </strong>{{$property->surface_area}}</li>
-				  <li class="list-group-item"><strong>Sup. Contruida </strong>{{$property->surface_builder}}</li>				  
+				  <li class="list-group-item detalle"><strong>Precio </strong>{{$property->sale_price}} $</li>
+				  <li class="list-group-item detalle"><strong>Sup. Terreno </strong>{{$property->surface_area}}</li>
+				  <li class="list-group-item detalle"><strong>Sup. Contruida </strong>{{$property->surface_builder}}</li>				  
 				</ul>
 			</div>
 	  	</div>

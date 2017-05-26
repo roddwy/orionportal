@@ -14,7 +14,8 @@
 				<th>Teléfono</th>
 				<th>Celular</th>
 				<th>Email</th>
-				<th>Cant prop registrados</th>
+				<th>Cant propietarios registrados</th>
+				<th>Cant Inmuebles registrados</th>
 				<th>Tipo Usuario</th>
 				<th>Acción</th>
 			</thead>
@@ -29,6 +30,7 @@
 						<td>{{ $user->cell_phone }}</td>
 						<td>{{ $user->email }}</td>
 						<td>{{ count($user->owner_currents)}}</td>
+						<td>{{ count($user->properties) }}</td>
 						<td>
 							@if($user->type == "admin")
 								<span class="label label-danger">Administrador</span>

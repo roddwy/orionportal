@@ -89,4 +89,9 @@ class property extends Model implements SluggableInterface
     {
         return $query->where('type_property_id', 'LIKE',  "%$type%");
     } 
+
+    public function scopeSearchOferta($query, $state)
+    {
+        return $query->where('state_id', 'LIKE', "%$state%");
+    }
 }

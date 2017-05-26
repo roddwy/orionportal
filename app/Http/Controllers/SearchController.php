@@ -11,6 +11,7 @@ use App\property;
 use App\Zone;
 use App\Category;
 use App\Type_Property;
+use App\State;
 
 class SearchController extends Controller
 {
@@ -21,7 +22,16 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-       $properties = property::where('state_id','<>','2')->search2($request->sale_price)->search3($request->zone_id)->search4($request->category_id)->search5($request->type_property_id)->orderBy('id', 'DESC')->paginate(3);
+        $states = State::where('name','vendido')->orWhere('name','inactivo')->get();
+        $statesid = array();
+        foreach ($states as $state) {
+            $statesid[] = array('state_id'=>$state->id);
+        }
+        //dd($statesid);
+
+       $properties = property::where('state_id','<>',$statesid[0])->where('state_id','<>',$statesid[1])
+                    ->search2($request->sale_price)->search3($request->zone_id)->search4($request->category_id)
+                    ->search5($request->type_property_id)->orderBy('id', 'DESC')->paginate(3);
        //$properties = property::all();
        //dd($properties);
        $properties->each(function($properties){
@@ -30,11 +40,13 @@ class SearchController extends Controller
             $properties->type_property;
             $properties->owner_current;
             $properties->zone;
-            $properties->images;               
+            $properties->images;
+            $properties->state;               
         });
        $zones = Zone::orderBy('name', 'ASC')->lists('name', 'id');
        $categories = Category::orderBy('name', 'ASC')->lists('name', 'id');
        $types = Type_Property::orderBy('name', 'ASC')->lists('name', 'id');
+       //$state = State::orderBy('name', 'ASC')->lists('name', 'id');
         return view('search')->with('properties', $properties)->with('zones',$zones)->with('categories', $categories)->with('types', $types);
     }
 

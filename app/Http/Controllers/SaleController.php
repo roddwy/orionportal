@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\property;
+use App\State;
 use DB;
 
 class SaleController extends Controller
@@ -16,11 +17,23 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $properties = property::where('state_id','3')->get();
-        //dd($properties);
-        return view('sale')->with('properties', $properties);
+       //$properties = DB::table('properties')->get();
+       //dd($properties);
+        $states = State::where('name','oferta')->get();
+        foreach ($states as $state) {
+            $stateid = $state->id;
+        }
+        //dd($stateid);
+        $properties = property::where('state_id',$stateid)->orderBy('id','DESC')->paginate(6);
+
+        /*$properties = DB::table('states')
+            ->leftJoin('properties', 'states.id', '=', 'properties.state_id')
+            ->where('states.name','=','oferta')->get();
+        dd($properties);*/ 
+        //$state = State::orderBy('name', 'ASC')->lists('name', 'id');       
+        return view('sale',['properties'=>$properties]);
     }
 
     /**
